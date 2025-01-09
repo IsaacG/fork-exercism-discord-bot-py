@@ -39,11 +39,14 @@ class PinnedMessage(base_cog.BaseCog):
         """Return a prior message from a channel history."""
         assert self.bot.user is not None
         for guild in self.bot.guilds:
-            channel = guild.get_channel(channel_id)
-            if isinstance(channel, discord.TextChannel):
-                async for message in channel.history(limit=50, oldest_first=None):
-                    if message.author.id == self.bot.user.id and message.content == content:
-                        return message
+            try:
+                channel = guild.get_channel(channel_id)
+                if isinstance(channel, discord.TextChannel):
+                    async for message in channel.history(limit=50, oldest_first=None):
+                        if message.author.id == self.bot.user.id and message.content == content:
+                            return message
+            except:
+                continue
         return None
 
     async def bump_message(self, channel: discord.TextChannel) -> None:
