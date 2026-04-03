@@ -15,7 +15,8 @@ from cogs import base_cog
 logger = logging.getLogger(__name__)
 
 TITLE = "Spam Detector"
-TRIGGER_COUNT_DURATIONS = [(5, 10), (3, 2)]
+# Message count and window (seconds)
+TRIGGER_COUNT_DURATIONS = [(5, 30), (3, 20)]
 DD = collections.defaultdict
 
 
